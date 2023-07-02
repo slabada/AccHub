@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<header th:fragment="title">
+    <div class="logo">
+        <a th:href="@{/}">AccountHub.</a>
+    </div>
+    <div class="reg-log">
+        <div th:if="${#authorization.expression('isAnonymous()')}">
+            <a th:href="@{/account/login}" style="margin-right: 70px">Вход</a>
+            <a th:href="@{/account/registration}" style="margin-right: 70px">Регистрация</a>
+        </div>
+        <div th:if="${!#authorization.expression('isAnonymous()')}">
+            <a th:href="@{/users/{id}(id=${session.user?.getId()})}">
+            <img class="profile-image" th:src="@{/avatars/{avatar}(avatar=${session.user.getAvatar()})}">
+            </a>
+        </div>
+    </div>
+</header>
+</html>

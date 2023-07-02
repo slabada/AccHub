@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        .table-lots {
+            margin-top: 20px;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .list-item a {
+            flex: 1;
+            margin-left: 300px;
+        }
+        .list-item p {
+            margin-right: 320px;
+        }
+        .NameLots{
+            margin-top: -7px;
+        }
+        .Sell{
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            margin-left: 150px;
+            margin-right: 220px;
+        }
+        .nameLot{
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<div class="container">
+    <h1 class="NameLots" th:text="'Список лотов ' + ${lots.getName()}">Список лотов</h1>
+    <a class="Sell" th:href="@{/lots/{id}/trade(id=${lots.getId()})}">Продать аккаунт</a>
+</div>
+<div class="table-lots">
+    <div th:each="orders : ${order}" class="list-item">
+        <a class="nameLot" th:href="@{/offer/{id}(id=${orders.getId()})}" th:text="${orders.getName()}"></a>
+        <p th:text="${orders.getPrice()} + ' руб.'"></p>
+    </div>
+</div>
+</body>
+</html>

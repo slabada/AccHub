@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .title{
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .short-description{
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .description{
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .GetDescription{
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        .price{
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .GetName{
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        .GetPrice{
+            font-size: 24px;
+            margin-bottom: 35px;
+        }
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .button-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<div class="container">
+    <a class="title">Оформление заказа</a>
+
+    <a class="short-description">краткое описание</a>
+    <a class="GetName" th:text="${offer.getName()}"/>
+
+    <a class="description">описание</a>
+    <a class="GetDescription" th:text="${offer.getDescription()}"/>
+
+    <a class="price">цена</a>
+    <a class="GetPrice" th:text="${offer.getPrice()} + ' руб.'"/>
+</div>
+<div class="button-container">
+    <button>Купить</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        .data{
+            margin: 0 auto;
+            width: 15%;
+        }
+        .header{
+            margin-left: 150px;
+        }
+        .avatar{
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+        }
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .header-settings{
+            font-weight: bold;
+            font-size: 36px;
+        }
+        .header-data{
+            font-weight: bold;
+            font-size: 20px;
+            margin-left: 150px;
+        }
+        .avatar-button{
+            display: flex;
+            align-items: center;
+        }
+        .button{
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button button {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<div class="header">
+    <p class="header-settings">Админ панель</p>
+</div>
+<p class="header-data" th:text="'Личные данные: ' + ${user.get().getUsername()}"/>
+<div>
+    <div class="data">
+        <div class="avatar-button">
+            <img class="avatar"
+                 th:src="@{/avatars/{avatar}(avatar=${user.get().getAvatar()})}">
+            <div class="button">
+                <form th:method="get" th:action="@{/users/{id}/edit/image(id=${user.get().getId()})}">
+                    <button>Изменить аватарку</button>
+                </form>
+                <form th:method="get" th:action="@{/users/{id}/edit/name(id=${user.get().getId()})}">
+                    <button>Изменить имя/ник</button>
+                </form>
+                <form th:if="${user.get().isActive() == true}" th:method="put" th:action="@{/users/{id}/edit/block(id=${user.get().getId()})}">
+                    <button>Заблокировать</button>
+                </form>
+                <form th:if="${user.get().isActive() == false}" th:method="put" th:action="@{/users/{id}/edit/block(id=${user.get().getId()})}">
+                    <button>Разблокировать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

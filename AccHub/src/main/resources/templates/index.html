@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        .table-lots{
+            margin-top: 50px;
+            margin-left: 150px;
+            font-size: 20px;
+        }
+        .lot{
+            margin-right: 150px;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+    <div class="table-lots">
+        <tr th:each="lot:${lots}">
+            <a class="lot" th:href="@{/lots/{id}(id=${lot.getId()}) }" th:text="${lot.getName()}"></a>
+        </tr>
+    </div>
+</body>
+</html>

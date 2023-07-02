@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        .profile-image-avatar {
+            margin-top: 50px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+        }
+        .name {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .avatar-name{
+            margin-left: 150px;
+        }
+        .button-settings{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #4caf50;
+            position: absolute;
+            top: 135px;
+            right: 77%;
+        }
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<div class="avatar-name">
+    <div>
+        <img class="profile-image-avatar" th:src="@{/avatars/{avatar}(avatar=${user.get().getAvatar()})}">
+        <a th:href="@{/users/settings}">
+            <div class="button-settings" th:if="${session.user.getId() == id}"></div>
+        </a>
+    </div>
+    <div>
+        <p class="name" th:text="${user.get().getUsername()}">TestName</p>
+        <form th:if="${session.user.getId() == id}" th:method="post" th:action="@{/logout}">
+            <button>выход</button>
+        </form>
+        <form th:if="${#authorization.expression('hasAuthority(''ADMIN'')') and session.user.getId() != id}"
+              th:action="@{/users/{id}/edit(id=${user.get().getId()})}">
+            <button>Админ панель</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

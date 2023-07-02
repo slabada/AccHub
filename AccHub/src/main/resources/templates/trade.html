@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        button{
+            width: 250px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        button {
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            font-size: 20px;
+            display: flex;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        textarea{
+            width: 245px;
+            height: 150px;
+            resize: none;
+        }
+        .header{
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        form{
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<form th:action="@{/lots/{id}/trade(id=${lot.getId()})}" th:method="post">
+    <a class="header" >Добавление товара</a>
+    <input th:type="text" th:placeholder="'краткое описание'" th:name="name">
+    <textarea th:type="text" th:placeholder="'описание'" th:name="description"></textarea>
+    <input th:type="text" th:placeholder="'цена'" th:name="price">
+    <button>Добавить</button>
+</form>
+</body>
+</html>

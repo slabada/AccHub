@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .input {
+            text-align: center;
+            margin-top: 7%;
+        }
+        input {
+            font-size: 20px;
+            margin-top: 30px;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+        button{
+            width: 250px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .header{
+            text-align: center;
+            position: relative;
+            font-weight: bold;
+            font-size: 30px;
+            top: 50px;
+            margin-right: 20px;
+            padding-left: 20px;
+        }
+        .link-padding{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .Error{
+            text-align: center;
+            font-weight: bold;
+        }
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<div class="Error">
+    <div th:if="${param.error}">
+        Не верный логин или пароль
+    </div>
+</div>
+<div class="header">
+    <a th:href="@{/account/login}" class="link-padding" style="text-decoration: underline">Вход</a>
+    <a th:href="@{/account/registration}" class="link-padding">Регистрация</a>
+</div>
+<div class="input">
+    <form th:method="post" th:action="@{/account/login}">
+        <input th:type="text" th:placeholder="'Имя или почта'" name="username">
+        <input th:type="password" th:placeholder="пароль" name="password">
+        <button>Вход</button>
+    </form>
+</div>
+</body>
+</html>

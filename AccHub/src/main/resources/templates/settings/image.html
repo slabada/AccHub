@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountHub</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <style>
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: #4caf50;
+            border-radius: 3px;
+            color: white;
+            border:black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .upload {
+            margin-top: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload > * {
+            margin: 10px;
+        }
+        .Error{
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<header th:replace="~{fragments/header :: title}" />
+<body>
+<p class="Error" th:text="${Error_Text}"></p>
+<form class="upload" th:method="put" th:action="@{/users/settings/image}" enctype="multipart/form-data">
+    <label for="image-input">Выберите изображение:</label>
+    <input id="image-input" type="file" name="file">
+    <button>Загрузить</button>
+</form>
+</body>
+</html>
